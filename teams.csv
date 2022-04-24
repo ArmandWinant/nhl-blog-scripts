@@ -1,33 +1,33 @@
-team,abbreviaton, conference, division
-Carolina Hurricanes,CAR,Eastern
-Columbus Blue Jackets,CBJ,Eastern
-New Jersey Devils,NJD,Eastern
-New York Islanders,NYI,Eastern
-New York Rangers,NYR,Eastern,Metropolitan,
-Philadelphia Flyers,PHI,Eastern,Metropolitan,
-Pittsburgh Penguins,PIT,Eastern,Metropolitan,
-Washington Capitals,WSH,Eastern,Atlantic,
-Boston Bruins,BOS,Eastern,Atlantic,
-Buffalo Sabres,BUF,Eastern,Atlantic,
-Detroit Red Wings,DET,Eastern,Atlantic,
-Florida Panthers,FLA,Eastern,Atlantic,
-Montréal Canadiens,MTL,Eastern,Atlantic,
-Ottawa Senators,OTT,Eastern,Atlantic,
-Tampa Bay Lightning,TBL,Eastern,Atlantic,
-Toronto Maple Leafs,TOR,Eastern,Atlantic,
-Arizona Coyotes,ARI,Western,Central,
-Chicago Blackhawks,CHI,Western,Central,
-Colorado Avalanche,COL,Western,Central,
-Dallas Stars,DAL,Western,Central,
-Minnesota Wild,MIN,Western,Central,
-Nashville Predators,NSH,Western,Central,
-St. Louis Blues,STL,Western,Central,
-Winnipeg Jets,WPG,Western,Central,
-Anaheim Ducks,ANA,Western,Pacific,
-Calgary Flames,CGY,Western,Pacific,
-Edmonton Oilers,EDM,Western,Pacific,
-Los Angeles Kings,LAK,Western,Pacific,
-San Jose Sharks,SJS,Western,Pacific,
-Seattle Kraken,SEA,Western,Pacific,
-Vancouver Canucks,VAN,Western,Pacific,
+team,abbreviaton,conference,division
+Carolina Hurricanes,CAR,Eastern,Metropolitan
+Columbus Blue Jackets,CBJ,Eastern,Metropolitan
+New Jersey Devils,NJD,Eastern,Metropolitan
+New York Islanders,NYI,Eastern,Metropolitan
+New York Rangers,NYR,Eastern,Metropolitan
+Philadelphia Flyers,PHI,Eastern,Metropolitan
+Pittsburgh Penguins,PIT,Eastern,Metropolitan
+Washington Capitals,WSH,Eastern,Metropolitan
+Boston Bruins,BOS,Eastern,Atlantic
+Buffalo Sabres,BUF,Eastern,Atlantic
+Detroit Red Wings,DET,Eastern,Atlantic
+Florida Panthers,FLA,Eastern,Atlantic
+Montréal Canadiens,MTL,Eastern,Atlantic
+Ottawa Senators,OTT,Eastern,Atlantic
+Tampa Bay Lightning,TBL,Eastern,Atlantic
+Toronto Maple Leafs,TOR,Eastern,Atlantic
+Arizona Coyotes,ARI,Western,Central
+Chicago Blackhawks,CHI,Western,Central
+Colorado Avalanche,COL,Western,Central
+Dallas Stars,DAL,Western,Central
+Minnesota Wild,MIN,Western,Central
+Nashville Predators,NSH,Western,Central
+St. Louis Blues,STL,Western,Central
+Winnipeg Jets,WPG,Western,Central
+Anaheim Ducks,ANA,Western,Pacific
+Calgary Flames,CGY,Western,Pacific
+Edmonton Oilers,EDM,Western,Pacific
+Los Angeles Kings,LAK,Western,Pacific
+San Jose Sharks,SJS,Western,Pacific
+Seattle Kraken,SEA,Western,Pacific
+Vancouver Canucks,VAN,Western,Pacific
 Vegas Golden Knights,VGK,Western,Pacific
