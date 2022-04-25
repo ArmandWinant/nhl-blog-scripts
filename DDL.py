@@ -2,7 +2,7 @@ import psycopg2
 from sql_queries import drop_table_queries, create_table_queries
 
 def create_database():
-    conn = psycopg2.connect(database="nhl_db")
+    conn = psycopg2.connect(database="postgres")
     conn.set_session(autocommit=True)
     cur = conn.cursor()
     
@@ -18,12 +18,14 @@ def create_database():
     return cur, conn
 
 def drop_tables(cur, conn):
-    for query in drop_table_queries:
+    for table, query in drop_table_queries.items():
+        print("Dropping table: ", table)
         cur.execute(query)
         conn.commit()
         
 def create_tables(cur, conn):
-    for query in create_table_queries:
+    for table, query in create_table_queries.items():
+        print("Creating table: ", table)
         cur.execute(query)
         conn.commit()
 
@@ -34,3 +36,7 @@ def reinitialise_db():
     
     cur.close()
     conn.close()
+    
+    
+if __name__ == "__main__":
+    reinitialise_db()
