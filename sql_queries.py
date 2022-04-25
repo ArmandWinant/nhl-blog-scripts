@@ -1,5 +1,6 @@
 # DROP TABLE
 summary_table_drop = "DROP TABLE IF EXISTS summary;"
+teams_table_drop = "DROP TABLE IF EXISTS teams;"
 
 # CREATE TABLES
 summary_table_create = """
@@ -25,7 +26,16 @@ summary_table_create = """
         shots_for SMALLINT,
         shots_against SMALLINT,
         fo_win_percentage REAL,
-        PRIMARY KEY (team, date)
+        PRIMARY KEY (team, game_date)
+    );
+"""
+
+teams_table_create = """
+    CREATE TABLE IF NOT EXISTS teams (
+        team VARCHAR(50) PRIMARY KEY,
+        abbreviation CHAR(3) NOT NULL,
+        conference CHAR(7) NOT NULL,
+        division VARCHAR(30) NOT NULL
     );
 """
 
@@ -54,29 +64,25 @@ summary_table_insert = """
         shots_against,
         fo_win_percentage
     )
-    VALUES (
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s
-    )
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
 """
 
+teams_table_insert = """
+    INSERT INTO teams (
+        team,
+        abbreviation,
+        conference,
+        division
+    )
+    VALUES (%s, %s, %s, %s);
+"""
 # QUERY LISTS
+drop_table_queries = {
+    "teams": teams_table_drop,
+    "summary": summary_table_drop
+}
+
+create_table_queries = {
+    "teams": teams_table_create,
+    "summary": summary_table_create
+}
