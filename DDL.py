@@ -35,8 +35,7 @@ def reinitialise_db():
     create_tables(cur, conn)
     
     cur.close()
-    conn.close()
-    
+    conn.close()    
     
 if __name__ == "__main__":
     reinitialise_db()
