@@ -11,6 +11,12 @@ def populate_teams_table():
     
     DML.close_db_connect(conn, cur)
     
+
+def remove_teams_table():
+    conn, cur = DML.db_connect()
+    cur.execute(teams_table_drop, row_values)
+    DML.close_db_connect(conn, cur)
+    
     
 if __name__=="__main__":
     populate_teams_table()
