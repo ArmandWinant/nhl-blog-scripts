@@ -43,6 +43,19 @@ def parse_record(row_tuples):
             # convert to float value
             data_dict[header] = float(value)
             continue
+        
+        # parse game information string (date & opoonent)
+        m = re.search(r'^\d{4}/\d{2}/\d{2}(vs|@) ([A-Z]){3}$', value)
+        if m:
+            game_info = parse_game_date(m.group(0))
+            if game_info:
+                home_game = game_info[0]
+                opponent = game_info[1]
+                game_date = game_info[2]
+                
+                data_dict["opponent"] = opponent
+                data_dict["home_game"] = home_game
+                data_dict["game_date"] = game_date
             
     return data_dict
 
@@ -55,16 +68,19 @@ def parse_game_date(game_string):
     returns
         two-element tuple: (string, date)
     """
-    m1 = re.search(r'[A-Z]+', game_string)
-    m2 = re.search(r'\d{4}/\d{2}/\d{2}', game_string)
+    home_game = True if "vs" in game_string else False
+    
+    m1 = re.search(r'[A-Z]{3}$', game_string)
+    m2 = re.search(r'^\d{4}/\d{2}/\d{2}', game_string)
     
     if m1 and m2:
-        oppent = m1.group(0)
+        opponent = m1.group(0)
         date = m2.group(0)
         
+        # convert date string to datetime object
         date = datetime.strptime(date, '%Y/%m/%d')
         
-        return (opponent, date)
+        return (home_game, opponent, date)
     else:
         return None
     
