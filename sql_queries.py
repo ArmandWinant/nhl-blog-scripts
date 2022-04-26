@@ -5,13 +5,15 @@ teams_table_drop = "DROP TABLE IF EXISTS teams;"
 # CREATE TABLES
 summary_table_create = """
     CREATE TABLE summary (
-        team VARCHAR(50) NOT NULL,
-        season CHAR(7) NOT NULL,
-        game_date DATE NOT NULL,
-        opponent VARCHAR(3) NOT NULL,
+        team CHAR(3),
+        season CHAR(7),
+        game_date DATE,
+        home_game BOOLEAN,
+        opponent CHAR(3),
         win BOOLEAN,
         loss BOOLEAN,
         tie BOOLEAN,
+        ot_loss BOOLEAN,
         points SMALLINT,
         points_percentage REAL,
         regulation_win BOOLEAN,
@@ -45,10 +47,12 @@ summary_table_insert = """
         team,
         season,
         game_date,
+        home_game,
         opponent,
         win,
         loss,
         tie,
+        ot_loss,
         points,
         points_percentage,
         regulation_win,
@@ -64,7 +68,7 @@ summary_table_insert = """
         shots_against,
         fo_win_percentage
     )
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
 """
 
 teams_table_insert = """

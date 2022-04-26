@@ -83,4 +83,3 @@ def parse_game_date(game_string):
         return (home_game, opponent, date)
     else:
         return None
-    
