@@ -28,13 +28,14 @@ def parse_record(row_tuples):
             data_dict[header] = value
             continue
         
-        if value.isnumeric():
+        m = re.search(r'^-*\d+$', value)
+        if value.isnumeric() or m:
             # convert all numerical strings to integers
             data_dict[header] = int(value)
             continue
         
         # search for floating number patterns
-        m = re.search(r'^\d*\.\d+$', value)
+        m = re.search(r'^-*\d*\.\d+$', value)
         if m:
             # convert to float value
             data_dict[header] = float(value)
@@ -54,8 +55,11 @@ def parse_record(row_tuples):
                 data_dict["game_date"] = game_date
                 continue
         
-        data_dict[header] = np.nan
-        continue
+        if value == "--":
+            data_dict[header] = np.nan
+            continue
+            
+        data_dict[header] = value
             
     return data_dict
 
