@@ -5,28 +5,28 @@ teams_table_drop = "DROP TABLE IF EXISTS teams;"
 # CREATE TABLES
 summary_table_create = """
     CREATE TABLE summary (
-        team CHAR(3),
+        team VARCHAR(50),
         season CHAR(7),
         game_date DATE,
         home_game BOOLEAN,
         opponent CHAR(3),
-        win BOOLEAN,
-        loss BOOLEAN,
-        tie BOOLEAN,
-        ot_loss BOOLEAN,
+        win SMALLINT,
+        loss SMALLINT,
+        tie SMALLINT,
+        ot_loss SMALLINT,
         points SMALLINT,
         points_percentage REAL,
-        regulation_win BOOLEAN,
-        regulation_overtime_win BOOLEAN,
-        shootout_win BOOLEAN,
+        regulation_win SMALLINT,
+        regulation_overtime_win SMALLINT,
+        shootout_win SMALLINT,
         goals_for SMALLINT,
         goals_against SMALLINT,
         pp_percentage REAL,
         pk_percentage REAL,
         net_pp_percentage REAL,
         net_pk_percentage REAL,
-        shots_for SMALLINT,
-        shots_against SMALLINT,
+        shots_for REAL,
+        shots_against REAL,
         fo_win_percentage REAL,
         PRIMARY KEY (team, game_date)
     );
@@ -68,7 +68,32 @@ summary_table_insert = """
         shots_against,
         fo_win_percentage
     )
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ON CONFLICT (team, game_date) DO UPDATE
+    SET
+        team = EXCLUDED.team,
+        season = EXCLUDED.season,
+        game_date = EXCLUDED.game_date,
+        home_game = EXCLUDED.home_game,
+        opponent = EXCLUDED.opponent,
+        win = EXCLUDED.win,
+        loss = EXCLUDED.loss,
+        tie = EXCLUDED.tie,
+        ot_loss = EXCLUDED.ot_loss,
+        points = EXCLUDED.points,
+        points_percentage = EXCLUDED.points_percentage,
+        regulation_win = EXCLUDED.regulation_win,
+        regulation_overtime_win = EXCLUDED.regulation_overtime_win,
+        shootout_win = EXCLUDED.shootout_win,
+        goals_for = EXCLUDED.goals_for,
+        goals_against = EXCLUDED.goals_against,
+        pp_percentage = EXCLUDED.pp_percentage,
+        pk_percentage = EXCLUDED.pk_percentage,
+        net_pp_percentage = EXCLUDED.net_pp_percentage,
+        net_pk_percentage = EXCLUDED.net_pk_percentage,
+        shots_for = EXCLUDED.shots_for,
+        shots_against = EXCLUDED.shots_against,
+        fo_win_percentage = EXCLUDED.fo_win_percentage;
 """
 
 teams_table_insert = """

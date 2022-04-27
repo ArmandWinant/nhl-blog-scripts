@@ -56,7 +56,7 @@ def parse_record(row_tuples):
                 continue
         
         if value == "--":
-            data_dict[header] = np.nan
+            data_dict[header] = None
             continue
             
         data_dict[header] = value
