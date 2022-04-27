@@ -22,15 +22,11 @@ def parse_record(row_tuples):
         # remove any leading/trailing spaces
         value = value.strip()
         header = header.strip()
-        
+           
+        # all alphabetical strings are returned unchanged
         if value.isalpha():
-            # double dashes correspond to missing values
-            if value == "--":
-                data_dict[header] = np.nan
-                continue
-            else:
-                # leave alphabetical strings unchanged
-                data_dict[header] = value
+            data_dict[header] = value
+            continue
         
         if value.isnumeric():
             # convert all numerical strings to integers
@@ -56,6 +52,10 @@ def parse_record(row_tuples):
                 data_dict["opponent"] = opponent
                 data_dict["home_game"] = home_game
                 data_dict["game_date"] = game_date
+                continue
+        
+        data_dict[header] = np.nan
+        continue
             
     return data_dict
 
