@@ -103,7 +103,13 @@ teams_table_insert = """
         conference,
         division
     )
-    VALUES (%s, %s, %s, %s);
+    VALUES (%s, %s, %s, %s)
+    ON CONFLICT (team) DO UPDATE
+    SET
+        team = EXCLUDED.team,
+        abbreviation = EXCLUDED.abbreviation,
+        conference = EXCLUDED.conference,
+        division = EXCLUDED.division;
 """
 # QUERY LISTS
 drop_table_queries = {
