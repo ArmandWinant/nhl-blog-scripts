@@ -5,7 +5,7 @@ teams_table_drop = "DROP TABLE IF EXISTS teams;"
 # CREATE TABLES
 summary_table_create = """
     CREATE TABLE summary (
-        team VARCHAR(50),
+        team CHAR(3),
         season CHAR(7),
         game_date DATE,
         home_game BOOLEAN,
