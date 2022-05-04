@@ -82,7 +82,7 @@ def parse_game_date(game_string):
         date = m2.group(0)
         
         # convert date string to datetime object
-        date = datetime.strptime(date, '%Y/%m/%d')
+        date = datetime.strptime(date, '%Y/%m/%d').date()
         
         return (home_game, opponent, date)
     else:
