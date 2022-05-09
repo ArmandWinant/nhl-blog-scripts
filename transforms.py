@@ -87,3 +87,12 @@ def parse_game_date(game_string):
         return (home_game, opponent, date)
     else:
         return None
+    
+
+def game_season(game_date):
+    """
+    inputs
+        game_date (datetime): date of the game
+    
+    returns:
+        season (int): start year of the season 
