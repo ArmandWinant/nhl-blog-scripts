@@ -49,10 +49,12 @@ def parse_record(row_tuples):
                 home_game = game_info[0]
                 opponent = game_info[1]
                 game_date = game_info[2]
+                game_season = game_info[3]
                 
                 data_dict["opponent"] = opponent
                 data_dict["home_game"] = home_game
                 data_dict["game_date"] = game_date
+                data_dict["season"] = f"{game_season}/{game_season+1}"
                 continue
         
         if value == "--":
@@ -84,9 +86,9 @@ def parse_game_date(game_string):
         # convert date string to datetime object
         date = datetime.strptime(date, '%Y/%m/%d').date()
         
-        season = game_season(date)
+        season_start_year = game_season(date)
         
-        return (home_game, opponent, date)
+        return (home_game, opponent, date, season_start_year)
     else:
         return None
     
@@ -99,4 +101,10 @@ def game_season(game_date):
     returns:
         season (int): start year of the season
     """
-    pass
+    game_month = game_date.month
+    game_year = game_date.year
+    
+    if month < 2 or month > 8:
+        return game_year
+    
+    return game_year - 1
