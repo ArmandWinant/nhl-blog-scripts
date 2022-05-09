@@ -84,6 +84,8 @@ def parse_game_date(game_string):
         # convert date string to datetime object
         date = datetime.strptime(date, '%Y/%m/%d').date()
         
+        season = game_season(date)
+        
         return (home_game, opponent, date)
     else:
         return None
@@ -95,4 +97,6 @@ def game_season(game_date):
         game_date (datetime): date of the game
     
     returns:
-        season (int): start year of the season 
+        season (int): start year of the season
+    """
+    pass
