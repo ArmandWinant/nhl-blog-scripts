@@ -33,7 +33,7 @@ def close_driver(driver):
     driver.close()
     
     
-def wait_for_element(source, search_by, target, timeout=10, unique_element=False):
+def wait_for_element(source, search_by, target, timeout=20, unique_element=False):
     """
     inputs:
         source ():
