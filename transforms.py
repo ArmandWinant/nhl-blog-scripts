@@ -66,7 +66,7 @@ def parse_record(row_tuples):
     return data_dict
 
 
-def parse_game_date(game_string):
+def parse_game_date(game_string, playoffs=False):
     """
     inputs
         game_string (string): no-space string
@@ -85,17 +85,15 @@ def parse_game_date(game_string):
         
         # convert date string to datetime object
         date = datetime.strptime(date, '%Y/%m/%d').date()
-        print(date)
         
-        season_start_year = game_season(date)
-        print(season_start_year)
-        print("=====================")
+        season_start_year = game_season(date, playoffs=playoffs)
+
         return (home_game, opponent, date, season_start_year)
     else:
         return None
     
 
-def game_season(game_date):
+def game_season(game_date, playoffs):
     """
     inputs
         game_date (datetime): date of the game
