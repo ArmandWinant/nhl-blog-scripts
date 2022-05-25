@@ -104,6 +104,9 @@ def game_season(game_date, playoffs):
     game_month = game_date.month
     game_year = game_date.year
     
+    if playoffs:
+        return game_year - 1
+    
     if game_month > 8:
         return game_year
     
