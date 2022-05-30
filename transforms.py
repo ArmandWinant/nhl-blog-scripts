@@ -54,7 +54,7 @@ def parse_record(row_tuples):
                 data_dict["opponent"] = opponent
                 data_dict["home_game"] = home_game
                 data_dict["game_date"] = game_date
-                data_dict["season"] = f"{game_season}/{(game_season+1)%100}"
+                data_dict["season"] = f"{game_season}/{str((game_season+1)%100).zfill(2)}"
                 continue
         
         if value == "--":
