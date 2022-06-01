@@ -18,7 +18,6 @@ class SummaryScraper(Scraper):
             "reportType": "game",
             "page": 0,
             "pageSize": 100
-#             "gameType": 2
         }
     
     
