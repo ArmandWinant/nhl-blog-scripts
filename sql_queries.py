@@ -28,6 +28,7 @@ summary_table_create = """
         shots_for REAL,
         shots_against REAL,
         fo_win_percentage REAL,
+        playoffs BOOLEAN,
         PRIMARY KEY (team, game_date)
     );
 """
@@ -66,9 +67,10 @@ summary_table_insert = """
         net_pk_percentage,
         shots_for,
         shots_against,
-        fo_win_percentage
+        fo_win_percentage,
+        playoffs
     )
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     ON CONFLICT (team, game_date) DO UPDATE
     SET
         team = EXCLUDED.team,
@@ -93,7 +95,8 @@ summary_table_insert = """
         net_pk_percentage = EXCLUDED.net_pk_percentage,
         shots_for = EXCLUDED.shots_for,
         shots_against = EXCLUDED.shots_against,
-        fo_win_percentage = EXCLUDED.fo_win_percentage;
+        fo_win_percentage = EXCLUDED.fo_win_percentage,
+        playoffs = EXCLUDED.playoffs;
 """
 
 teams_table_insert = """
