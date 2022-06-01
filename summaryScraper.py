@@ -17,12 +17,17 @@ class SummaryScraper(Scraper):
             "aggregate": 0,
             "reportType": "game",
             "page": 0,
-            "pageSize": 100,
-            "gameType": 2
+            "pageSize": 100
+#             "gameType": 2
         }
     
     
-    def build_url(self, start=None, end=None):
+    def build_url(self, playoffs, start=None, end=None):
+        if playoffs:
+            self.url_dict["game_type"] = 3
+        else:
+            self.url_dict["game_type"] = 2
+        
         if (isinstance(start, str) and start.isnumeric()) or isinstance(start, int):
             start = int(start)
             self.url_dict["seasonFrom"] = f"{start}{start+1}"
@@ -117,12 +122,12 @@ class SummaryScraper(Scraper):
             if self.url_dict["page"] >= total_pages:
                 break
                     
-    def etl(self, start):
+    def etl(self, start, playoffs=False):
         # the chrome driver and database cursor are used in multiple scripts
         self.open_driver()
         self.db_connect()
         
-        self.build_url(start=start)
+        self.build_url(start=start, playoffs=playoffs)
         self.extract(start)
         self.load()
         
