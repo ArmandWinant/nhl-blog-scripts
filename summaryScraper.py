@@ -24,9 +24,9 @@ class SummaryScraper(Scraper):
     
     def build_url(self, playoffs, start=None, end=None):
         if playoffs:
-            self.url_dict["game_type"] = 3
+            self.url_dict["gameType"] = 3
         else:
-            self.url_dict["game_type"] = 2
+            self.url_dict["gameType"] = 2
         
         if (isinstance(start, str) and start.isnumeric()) or isinstance(start, int):
             start = int(start)
@@ -45,7 +45,7 @@ class SummaryScraper(Scraper):
     
     
     def transform(self, headers, row_elements):
-        playoffs = self.url_dict["game_type"] == 3
+        playoffs = self.url_dict["gameType"] == 3
         
         for row in row_elements:
             row_cells = wait_for_element(source=row, search_by=By.CLASS_NAME, target="rt-td")
