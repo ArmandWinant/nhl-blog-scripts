@@ -44,7 +44,9 @@ class SummaryScraper(Scraper):
                 self.url_dict["dateTo"] = datetime.now().date()        
     
     
-    def transform(self, headers, row_elements):        
+    def transform(self, headers, row_elements):
+        playoffs = self.url_dict["game_type"] == 3
+        
         for row in row_elements:
             row_cells = wait_for_element(source=row, search_by=By.CLASS_NAME, target="rt-td")
             row_values = [cell.text for cell in row_cells]
@@ -78,7 +80,8 @@ class SummaryScraper(Scraper):
                 map_dict["Net PK%"],
                 map_dict["Shots/GP"],
                 map_dict["GA/GP"],
-                map_dict["FOW%"]
+                map_dict["FOW%"],
+                playoffs
             ]
                     
             self.staged_data.append(ordered_data_list)
