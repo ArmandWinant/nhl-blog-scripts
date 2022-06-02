@@ -1,6 +1,7 @@
 # DROP TABLE
 summary_table_drop = "DROP TABLE IF EXISTS summary;"
 teams_table_drop = "DROP TABLE IF EXISTS teams;"
+powerplay_table_drop = "DROP TABLE IF EXISTS powerplay;"
 
 # CREATE TABLES
 summary_table_create = """
@@ -39,6 +40,12 @@ teams_table_create = """
         abbreviation CHAR(3) NOT NULL,
         conference CHAR(7) NOT NULL,
         division VARCHAR(30) NOT NULL
+    );
+"""
+
+powerplay_table_create = """
+    CREATE TABLE IF NOT EXISTS powerplay (
+    
     );
 """
 
@@ -114,13 +121,23 @@ teams_table_insert = """
         conference = EXCLUDED.conference,
         division = EXCLUDED.division;
 """
+
+powerplay_table_insert = """
+    INSERT INTO powerplay ()
+    VALUES ()
+    ON CONFLICT () DO UPDATE
+    SET
+"""
+
 # QUERY LISTS
 drop_table_queries = {
     "teams": teams_table_drop,
-    "summary": summary_table_drop
+    "summary": summary_table_drop,
+    "powerplay": powerplay_table_drop
 }
 
 create_table_queries = {
     "teams": teams_table_create,
-    "summary": summary_table_create
+    "summary": summary_table_create,
+    "powerplay": powerplay_table_create
 }
