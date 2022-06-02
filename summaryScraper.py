@@ -11,29 +11,7 @@ import time
 class SummaryScraper(Scraper):
     def __init__(self):
         super().__init__()
-        self.table_insert = summary_table_insert
-    
-    
-#     def build_url(self, playoffs, start=None, end=None):
-#         if playoffs:
-#             self.url_dict["gameType"] = 3
-#         else:
-#             self.url_dict["gameType"] = 2
-        
-#         if (isinstance(start, str) and start.isnumeric()) or isinstance(start, int):
-#             start = int(start)
-#             self.url_dict["seasonFrom"] = f"{start}{start+1}"
-#             self.url_dict["seasonTo"] = f"{start}{start+1}"
-            
-#             self.url_dict["dateFromSeason"] = []
-            
-#         elif isinstance(start, datetime):            
-#             self.url_dict["dateFrom"] = start.strftime("%Y-%m-%d")
-            
-#             if isinstance(end, datetime):
-#                 self.url_dict["dateTo"] = end.strftime("%Y-%m-%d")
-#             else:
-#                 self.url_dict["dateTo"] = datetime.now().date()        
+        self.table_insert = summary_table_insert      
     
     
     def transform(self, headers, row_elements):
@@ -78,6 +56,7 @@ class SummaryScraper(Scraper):
                     
             self.staged_data.append(ordered_data_list)
             
+            
     def extract(self, url):
         """sends requests to the url and scrapes the table elements (header and rows)"""
         self.url_dict["page"] = 0
@@ -116,6 +95,7 @@ class SummaryScraper(Scraper):
             
             if self.url_dict["page"] >= total_pages:
                 break
+                    
                     
     def etl(self, start, playoffs=False):
         # the chrome driver and database cursor are used in multiple scripts

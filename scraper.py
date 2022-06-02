@@ -68,14 +68,15 @@ class Scraper:
             
             self.url_dict["dateFromSeason"] = []
             
-        elif isinstance(start, datetime):            
-            self.url_dict["dateFrom"] = start.strftime("%Y-%m-%d")
+#         elif isinstance(start, datetime):            
+#             self.url_dict["dateFrom"] = start.strftime("%Y-%m-%d")
             
-            if isinstance(end, datetime):
-                self.url_dict["dateTo"] = end.strftime("%Y-%m-%d")
-            else:
-                self.url_dict["dateTo"] = datetime.now().date() 
+#             if isinstance(end, datetime):
+#                 self.url_dict["dateTo"] = end.strftime("%Y-%m-%d")
+#             else:
+#                 self.url_dict["dateTo"] = datetime.now().date() 
                 
+    
     def load(self):
         execute_batch(self.cur, self.table_insert, self.staged_data)
         print(f"Loaded {len(self.staged_data)} records")
