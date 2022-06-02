@@ -12,35 +12,28 @@ class SummaryScraper(Scraper):
     def __init__(self):
         super().__init__()
         self.table_insert = summary_table_insert
-        self.base_url = "https://www.nhl.com/stats/teams?"
-        self.url_dict = {
-            "aggregate": 0,
-            "reportType": "game",
-            "page": 0,
-            "pageSize": 100
-        }
     
     
-    def build_url(self, playoffs, start=None, end=None):
-        if playoffs:
-            self.url_dict["gameType"] = 3
-        else:
-            self.url_dict["gameType"] = 2
+#     def build_url(self, playoffs, start=None, end=None):
+#         if playoffs:
+#             self.url_dict["gameType"] = 3
+#         else:
+#             self.url_dict["gameType"] = 2
         
-        if (isinstance(start, str) and start.isnumeric()) or isinstance(start, int):
-            start = int(start)
-            self.url_dict["seasonFrom"] = f"{start}{start+1}"
-            self.url_dict["seasonTo"] = f"{start}{start+1}"
+#         if (isinstance(start, str) and start.isnumeric()) or isinstance(start, int):
+#             start = int(start)
+#             self.url_dict["seasonFrom"] = f"{start}{start+1}"
+#             self.url_dict["seasonTo"] = f"{start}{start+1}"
             
-            self.url_dict["dateFromSeason"] = []
+#             self.url_dict["dateFromSeason"] = []
             
-        elif isinstance(start, datetime):            
-            self.url_dict["dateFrom"] = start.strftime("%Y-%m-%d")
+#         elif isinstance(start, datetime):            
+#             self.url_dict["dateFrom"] = start.strftime("%Y-%m-%d")
             
-            if isinstance(end, datetime):
-                self.url_dict["dateTo"] = end.strftime("%Y-%m-%d")
-            else:
-                self.url_dict["dateTo"] = datetime.now().date()        
+#             if isinstance(end, datetime):
+#                 self.url_dict["dateTo"] = end.strftime("%Y-%m-%d")
+#             else:
+#                 self.url_dict["dateTo"] = datetime.now().date()        
     
     
     def transform(self, headers, row_elements):

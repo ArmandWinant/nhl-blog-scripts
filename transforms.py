@@ -1,6 +1,6 @@
-import psycopg2
+# import psycopg2
 import pandas as pd
-import numpy as np
+# import numpy as np
 import os
 import glob
 import re
@@ -111,3 +111,17 @@ def game_season(game_date, playoffs):
         return game_year
     
     return game_year - 1
+
+
+def time_to_float(time_string):
+    """
+    converts time given as a string (mm:ss) to an integer representing seconds 
+    """
+    time_list = time_sting.split(":")
+    
+    minutes = int(time_list[0])
+    seconds = int(time_list[1])
+    
+    time_float = minutes * 60 + seconds
+    
+    return time_float

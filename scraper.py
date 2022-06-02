@@ -24,11 +24,13 @@ class Scraper:
         self.driver = None
         self.conn = None
         self.cur = None
+        
         self.table_data = None
         self.table_headers = None
         self.table_insert = ""
         self.staged_data = []
         
+        self.base_url = "https://www.nhl.com/stats/teams?"
         self.url_dict = {
             "aggregate": 0,
             "reportType": "game",
@@ -48,7 +50,29 @@ class Scraper:
     def close_db_connect(self):
         if self.conn and self.cur:
             close_db_connect(self.conn, self.cur)
-
+    
+    
+    def build_url(self, playoffs, start=None, end=None):
+        if playoffs:
+            self.url_dict["gameType"] = 3
+        else:
+            self.url_dict["gameType"] = 2
+        
+        if (isinstance(start, str) and start.isnumeric()) or isinstance(start, int):
+            start = int(start)
+            self.url_dict["seasonFrom"] = f"{start}{start+1}"
+            self.url_dict["seasonTo"] = f"{start}{start+1}"
+            
+            self.url_dict["dateFromSeason"] = []
+            
+        elif isinstance(start, datetime):            
+            self.url_dict["dateFrom"] = start.strftime("%Y-%m-%d")
+            
+            if isinstance(end, datetime):
+                self.url_dict["dateTo"] = end.strftime("%Y-%m-%d")
+            else:
+                self.url_dict["dateTo"] = datetime.now().date() 
+                
     def load(self):
         execute_batch(self.cur, self.table_insert, self.staged_data)
         print(f"Loaded {len(self.staged_data)} records")
