@@ -37,6 +37,8 @@ class Scraper:
             "pageSize": 100
         }
     
+    
+    # SELENIUM DRIVER
     def open_driver(self):
         self.driver = open_driver()
     
@@ -44,6 +46,7 @@ class Scraper:
         if self.driver:
             close_driver(self.driver)
             
+    # POSTGRESQL DATABASE
     def db_connect(self):
         self.conn, self.cur = db_connect()
     
@@ -52,7 +55,7 @@ class Scraper:
             close_db_connect(self.conn, self.cur)
     
     
-    def build_url(self, playoffs, start=None, end=None):
+    def build_url(self, playoffs, start, end=None):
         if playoffs:
             self.url_dict["gameType"] = 3
         else:
