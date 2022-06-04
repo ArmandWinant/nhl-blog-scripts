@@ -41,7 +41,14 @@ def parse_record(row_tuples):
             data_dict[header] = float(value)
             continue
         
-        # parse game information string (date & opoonent)
+        # search for mm:ss format string
+        m = re.search(r'^\d{1,2}:\d{2}$', value)
+        if m:
+            seconds_int = time_str_to_int(m.group(0))
+            data_dict[header] = seconds_int
+            continue
+        
+        # parse game information string (date & opponent)
         m = re.search(r'^\d{4}/\d{2}/\d{2}(vs|@) ([A-Z]){3}$', value)
         if m:
             game_info = parse_game_date(m.group(0))
@@ -113,15 +120,15 @@ def game_season(game_date, playoffs):
     return game_year - 1
 
 
-def time_to_float(time_string):
+def time_str_to_int(time_string):
     """
     converts time given as a string (mm:ss) to an integer representing seconds 
     """
-    time_list = time_sting.split(":")
+    time_list = time_string.split(":")
     
-    minutes = int(time_list[0])
-    seconds = int(time_list[1])
+    minutes = int(time_list[0].strip())
+    seconds = int(time_list[1].strip())
     
-    time_float = minutes * 60 + seconds
+    time_int = minutes * 60 + seconds
     
-    return time_float
+    return time_int

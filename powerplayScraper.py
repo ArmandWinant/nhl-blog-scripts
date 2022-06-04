@@ -8,10 +8,11 @@ from datetime import datetime
 import time
 
 
-class SummaryScraper(Scraper):
+class PowerplayScraper(Scraper):
     def __init__(self):
         super().__init__()
-        self.table_insert = powerplay_table_insert      
+        self.table_insert = powerplay_table_insert
+        self.url_dict["report"]= "powerplay"
     
     
     def transform(self, headers, row_elements):
@@ -29,21 +30,11 @@ class SummaryScraper(Scraper):
             
             ordered_data_list = [
                 team_abbreviation,
-#                 map_dict["season"],
                 map_dict["game_date"],
-#                 map_dict["home_game"],
-#                 map_dict["opponent"],
-#                 map_dict["W"],
-#                 map_dict["L"],
-#                 map_dict["T"],
-#                 map_dict["OT"],
-#                 map_dict["P"],
-#                 map_dict["P%"],
                 map_dict["PP Opp"],
                 map_dict["PP GF"],
                 map_dict["SH GA"],
-                map_dict["PP TOI/GP"],
-#                 playoffs
+                map_dict["PP TOI/GP"]
             ]
                     
             self.staged_data.append(ordered_data_list)
@@ -85,7 +76,8 @@ class SummaryScraper(Scraper):
                     self.url_dict["page"] += 1
                     print("Skipped page ", self.url_dict["page"])
             
-            if self.url_dict["page"] >= total_pages:
+#             if self.url_dict["page"] >= total_pages:
+            if True:
                 break
                     
                     

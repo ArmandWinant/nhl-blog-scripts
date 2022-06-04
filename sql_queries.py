@@ -5,7 +5,7 @@ powerplay_table_drop = "DROP TABLE IF EXISTS powerplay;"
 
 # CREATE TABLES
 summary_table_create = """
-    CREATE TABLE summary (
+    CREATE TABLE IF NOT EXISTS summary (
         team CHAR(3),
         season CHAR(7),
         game_date DATE,
@@ -43,15 +43,14 @@ teams_table_create = """
     );
 """
 
-powerplay_table_create =
-    """
+powerplay_table_create = """
     CREATE TABLE IF NOT EXISTS powerplay (
         team CHAR(3),
         game_date DATE,
         pp_opportunities SMALLINT,
         pp_goals_for SMALLINT,
         sh_goals_against SMALLINT,
-        pp_toi SMALLINT
+        pp_toi SMALLINT,
         PRIMARY KEY (team, game_date)
     );
     """
