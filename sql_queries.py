@@ -43,11 +43,39 @@ teams_table_create = """
     );
 """
 
-powerplay_table_create = """
+powerplay_table_create =
+    """
     CREATE TABLE IF NOT EXISTS powerplay (
-    
+        team CHAR(3),
+        game_date DATE,
+        pp_opportunities SMALLINT,
+        pp_goals_for SMALLINT,
+        sh_goals_against SMALLINT,
+        pp_toi SMALLINT
+        PRIMARY KEY (team, game_date)
     );
-"""
+    """
+# """
+#     CREATE TABLE IF NOT EXISTS powerplay (
+#         team CHAR(3),
+#         season CHAR(7),
+#         game_date DATE,
+#         home_game BOOLEAN,
+#         opponent CHAR(3),
+#         win SMALLINT,
+#         loss SMALLINT,
+#         tie SMALLINT,
+#         ot_loss SMALLINT,
+#         points SMALLINT,
+#         points_percentage REAL,
+#         pp_opportunities SMALLINT,
+#         pp_goals_for SMALLINT,
+#         sh_goals_against SMALLINT,
+#         pp_toi SMALLINT,
+#         playoffs BOOLEAN,
+#         PRIMARY KEY (team, game_date)
+#     );
+# """
 
 # INSERT RECORDS
 summary_table_insert = """
@@ -123,17 +151,28 @@ teams_table_insert = """
 """
 
 powerplay_table_insert = """
-    INSERT INTO powerplay ()
-    VALUES ()
-    ON CONFLICT () DO UPDATE
+    INSERT INTO powerplay (
+        team,
+        game_date,
+        pp_opportunities,
+        pp_goals_for,
+        sh_goals_against,
+        pp_toi
+    )
+    VALUES (%s, %s, %s, %s, %s, %s)
+    ON CONFLICT (team, game_date) DO UPDATE
     SET
+        pp_opportunities = EXCLUDED.pp_opportunities,
+        pp_goals_for = EXCLUDED.pp_goals_for,
+        sh_goals_against = EXCLUDED.sh_goals_against,
+        pp_toi = EXCLUDED.pp_toi;
 """
 
 # QUERY LISTS
 drop_table_queries = {
-    "teams": teams_table_drop,
-    "summary": summary_table_drop,
-    "powerplay": powerplay_table_drop
+#     "teams": teams_table_drop,
+#     "summary": summary_table_drop,
+#     "powerplay": powerplay_table_drop
 }
 
 create_table_queries = {
