@@ -2,6 +2,7 @@
 summary_table_drop = "DROP TABLE IF EXISTS summary;"
 teams_table_drop = "DROP TABLE IF EXISTS teams;"
 powerplay_table_drop = "DROP TABLE IF EXISTS powerplay;"
+shot_attempts_table_drop = "DROP TABLE IF EXISTS shot_attempts;"
 
 # CREATE TABLES
 summary_table_create = """
@@ -55,7 +56,7 @@ powerplay_table_create = """
     );
     """
 
-shot_attempts_table_create. ="""
+shot_attempts_table_create ="""
     CREATE TABLE IF NOT EXISTS shot_attempts (
         team CHAR(3),
         game_date DATE,
@@ -63,17 +64,18 @@ shot_attempts_table_create. ="""
         sat_for SMALLINT,
         sat_against SMALLINT,
         sat SMALLINT,
-        sat_behind SMALLINT,
         sat_tied SMALLINT,
         sat_ahead SMALLINT,
+        sat_behind SMALLINT,
         sat_close SMALLINT,
         usat_for SMALLINT,
         usat_against SMALLINT,
         usat SMALLINT,
-        usat_behind SMALLINT,
         usat_tied SMALLINT,
         usat_ahead SMALLINT,
-        usat_close SMALLINT
+        usat_behind SMALLINT,
+        usat_close SMALLINT,
+        PRIMARY KEY (team, game_date)
     );
 """
 
@@ -177,35 +179,36 @@ shot_attempts_table_insert = """
         sat_for,
         sat_against,
         sat,
-        sat_behind,
         sat_tied,
         sat_ahead,
+        sat_behind,
         sat_close,
         usat_for,
         usat_against,
         usat,
-        usat_behind,
         usat_tied,
         usat_ahead,
+        usat_behind,
         usat_close
-    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s, %s, %s)
+    )
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s, %s, %s)
     ON CONFLICT(team, game_date) DO UPDATE
     SET
         shots = EXCLUDED.shots,
         sat_for = EXCLUDED.sat_for,
         sat_against = EXCLUDED.sat_against,
         sat = EXCLUDED.sat,
-        sat_behind = EXCLUDED.sat_behind,
         sat_tied = EXCLUDED.sat_tied,
         sat_ahead = EXCLUDED.sat_ahead,
+        sat_behind = EXCLUDED.sat_behind,
         sat_close = EXCLUDED.sat_close,
         usat_for = EXCLUDED.usat_for,
         usat_against = EXCLUDED.usat_against,
         usat = EXCLUDED.usat,
-        usat_behind = EXCLUDED.usat_behind,
         usat_tied = EXCLUDED.usat_tied,
         usat_ahead = EXCLUDED.usat_ahead,
-        usat_close = EXCLUDED.usat_close
+        usat_behind = EXCLUDED.usat_behind,
+        usat_close = EXCLUDED.usat_close;
 """
 
 # QUERY LISTS
@@ -218,5 +221,6 @@ drop_table_queries = {
 create_table_queries = {
     "teams": teams_table_create,
     "summary": summary_table_create,
-    "powerplay": powerplay_table_create
+    "powerplay": powerplay_table_create,
+    "shot_attempts": shot_attempts_table_create
 }

@@ -87,11 +87,7 @@ class ShotAttemptsScraper(Scraper):
                     self.url_dict["page"] += 1
                     print("Skipped page ", self.url_dict["page"])
             
-#             if self.url_dict["page"] >= total_pages:
-            if True:
-                for row in self.staged_data:
-                    print(row)
-#                 print(self.staged_data)
+            if self.url_dict["page"] >= total_pages:
                 break
                     
                     
