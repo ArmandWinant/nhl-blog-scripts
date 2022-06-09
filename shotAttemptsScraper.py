@@ -2,7 +2,7 @@ from extract import open_driver, close_driver, wait_for_element
 from transforms import parse_record, parse_game_date, game_season
 from selenium.webdriver.common.by import By
 from scraper import Scraper, get_table_columns, get_table_rows
-from sql_queries import powerplay_table_insert
+from sql_queries import shot_attempts_table_insert
 import urllib.parse
 from datetime import datetime
 import time
@@ -11,8 +11,8 @@ import time
 class ShotAttemptsScraper(Scraper):
     def __init__(self):
         super().__init__()
-        self.table_insert = powerplay_table_insert
-        self.url_dict["report"]= "powerplay"
+        self.table_insert = shot_attempts_table_insert
+        self.url_dict["report"]= "summaryshooting"
     
     
     def transform(self, headers, row_elements):
@@ -31,10 +31,21 @@ class ShotAttemptsScraper(Scraper):
             ordered_data_list = [
                 team_abbreviation,
                 map_dict["game_date"],
-                map_dict["PP Opp"],
-                map_dict["PP GF"],
-                map_dict["SH GA"],
-                map_dict["PP TOI/GP"]
+                map_dict["Shots"],
+                map_dict["SAT For"],
+                map_dict["SAT Agst"],
+                map_dict["SAT"],
+                map_dict["SAT Tied"],
+                map_dict["SAT Ahead"],
+                map_dict["SAT Behind"],
+                map_dict["SAT Close"],
+                map_dict["USAT For"],
+                map_dict["USAT Agst"],
+                map_dict["USAT"],
+                map_dict["USAT Tied"],
+                map_dict["USAT Ahead"],
+                map_dict["USAT Behind"],
+                map_dict["USAT Close"],
             ]
                     
             self.staged_data.append(ordered_data_list)
@@ -76,7 +87,11 @@ class ShotAttemptsScraper(Scraper):
                     self.url_dict["page"] += 1
                     print("Skipped page ", self.url_dict["page"])
             
-            if self.url_dict["page"] >= total_pages:
+#             if self.url_dict["page"] >= total_pages:
+            if True:
+                for row in self.staged_data:
+                    print(row)
+#                 print(self.staged_data)
                 break
                     
                     
