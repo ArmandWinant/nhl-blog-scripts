@@ -8,7 +8,7 @@ from datetime import datetime
 import time
 
 
-class PowerplayScraper(Scraper):
+class ShotAttemptsScraper(Scraper):
     def __init__(self):
         super().__init__()
         self.table_insert = powerplay_table_insert

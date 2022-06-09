@@ -54,27 +54,29 @@ powerplay_table_create = """
         PRIMARY KEY (team, game_date)
     );
     """
-# """
-#     CREATE TABLE IF NOT EXISTS powerplay (
-#         team CHAR(3),
-#         season CHAR(7),
-#         game_date DATE,
-#         home_game BOOLEAN,
-#         opponent CHAR(3),
-#         win SMALLINT,
-#         loss SMALLINT,
-#         tie SMALLINT,
-#         ot_loss SMALLINT,
-#         points SMALLINT,
-#         points_percentage REAL,
-#         pp_opportunities SMALLINT,
-#         pp_goals_for SMALLINT,
-#         sh_goals_against SMALLINT,
-#         pp_toi SMALLINT,
-#         playoffs BOOLEAN,
-#         PRIMARY KEY (team, game_date)
-#     );
-# """
+
+shot_attempts_table_create. ="""
+    CREATE TABLE IF NOT EXISTS shot_attempts (
+        team CHAR(3),
+        game_date DATE,
+        shots SMALLINT,
+        sat_for SMALLINT,
+        sat_against SMALLINT,
+        sat SMALLINT,
+        sat_behind SMALLINT,
+        sat_tied SMALLINT,
+        sat_ahead SMALLINT,
+        sat_close SMALLINT,
+        usat_for SMALLINT,
+        usat_against SMALLINT,
+        usat SMALLINT,
+        usat_behind SMALLINT,
+        usat_tied SMALLINT,
+        usat_ahead SMALLINT,
+        usat_close SMALLINT
+    );
+"""
+
 
 # INSERT RECORDS
 summary_table_insert = """
@@ -165,6 +167,45 @@ powerplay_table_insert = """
         pp_goals_for = EXCLUDED.pp_goals_for,
         sh_goals_against = EXCLUDED.sh_goals_against,
         pp_toi = EXCLUDED.pp_toi;
+"""
+
+shot_attempts_table_insert = """
+    INSERT INTO shot_attempts (
+        team,
+        game_date,
+        shots,
+        sat_for,
+        sat_against,
+        sat,
+        sat_behind,
+        sat_tied,
+        sat_ahead,
+        sat_close,
+        usat_for,
+        usat_against,
+        usat,
+        usat_behind,
+        usat_tied,
+        usat_ahead,
+        usat_close
+    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s, %s, %s)
+    ON CONFLICT(team, game_date) DO UPDATE
+    SET
+        shots = EXCLUDED.shots,
+        sat_for = EXCLUDED.sat_for,
+        sat_against = EXCLUDED.sat_against,
+        sat = EXCLUDED.sat,
+        sat_behind = EXCLUDED.sat_behind,
+        sat_tied = EXCLUDED.sat_tied,
+        sat_ahead = EXCLUDED.sat_ahead,
+        sat_close = EXCLUDED.sat_close,
+        usat_for = EXCLUDED.usat_for,
+        usat_against = EXCLUDED.usat_against,
+        usat = EXCLUDED.usat,
+        usat_behind = EXCLUDED.usat_behind,
+        usat_tied = EXCLUDED.usat_tied,
+        usat_ahead = EXCLUDED.usat_ahead,
+        usat_close = EXCLUDED.usat_close
 """
 
 # QUERY LISTS
