@@ -3,6 +3,7 @@ summary_table_drop = "DROP TABLE IF EXISTS summary;"
 teams_table_drop = "DROP TABLE IF EXISTS teams;"
 powerplay_table_drop = "DROP TABLE IF EXISTS powerplay;"
 shot_attempts_table_drop = "DROP TABLE IF EXISTS shot_attempts;"
+goals_by_period_table_drop = "DROP TABLE IF EXISTS goals_by_period;"
 
 # CREATE TABLES
 summary_table_create = """
@@ -76,6 +77,25 @@ shot_attempts_table_create ="""
         usat_behind SMALLINT,
         usat_close SMALLINT,
         PRIMARY KEY (team, game_date)
+    );
+"""
+
+goals_by_period_table_create = """
+    CREATE TABLE IF NOT EXISTS goals_by_period (
+        team CHAR(3),
+        game_date DATE,
+        ev_goals_for SMALLINT,
+        pp_goals_for SMALLINT,
+        sh_goals_for SMALLINT,
+        gf_p1 SMALLINT,
+        gf_p2 SMALLINT,
+        gf_p3 SMALLINT,
+        gf_ot SMALLINT,
+        ga_p1 SMALLINT,
+        ga_p2 SMALLINT,
+        ga_p3 SMALLINT,
+        ga_ot SMALLINT,
+        PRIMARY KEY(team, game_date)
     );
 """
 
@@ -209,6 +229,37 @@ shot_attempts_table_insert = """
         usat_ahead = EXCLUDED.usat_ahead,
         usat_behind = EXCLUDED.usat_behind,
         usat_close = EXCLUDED.usat_close;
+"""
+
+goals_by_period_table_insert = """
+    INSERT INTO goals_by_period (
+        team,
+        game_date,
+        ev_goals_for,
+        pp_goals_for,
+        sh_goals_for,
+        gf_p1,
+        gf_p2,
+        gf_p3,
+        gf_ot,
+        ga_p1,
+        ga_p2,
+        ga_p3,
+        ga_ot
+    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ON CONFLICT (team, game_date) DO UPDATE
+    SET
+        ev_goals_for = EXCLUDED.ev_goals_for,
+        pp_goals_for = EXCLUDED.pp_goals_for,
+        sh_goals_for = EXCLUDED.sh_goals_for,
+        gf_p1 = EXCLUDED.gf_p1,
+        gf_p2 = EXCLUDED.gf_p2,
+        gf_p3 = EXCLUDED.gf_p3,
+        gf_ot = EXCLUDED.gf_ot,
+        ga_p1 = EXCLUDED.ga_p1,
+        ga_p2 = EXCLUDED.ga_p2,
+        ga_p3 = EXCLUDED.ga_p3,
+        ga_ot = EXCLUDED.ga_ot;
 """
 
 # QUERY LISTS
