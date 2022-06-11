@@ -84,17 +84,17 @@ goals_by_period_table_create = """
     CREATE TABLE IF NOT EXISTS goals_by_period (
         team CHAR(3),
         game_date DATE,
-        ev_goals_for SMALLINT,
-        pp_goals_for SMALLINT,
-        sh_goals_for SMALLINT,
-        gf_p1 SMALLINT,
-        gf_p2 SMALLINT,
-        gf_p3 SMALLINT,
-        gf_ot SMALLINT,
-        ga_p1 SMALLINT,
-        ga_p2 SMALLINT,
-        ga_p3 SMALLINT,
-        ga_ot SMALLINT,
+        goals_for_ev SMALLINT,
+        goals_for_pp SMALLINT,
+        goals_for_sh SMALLINT,
+        goals_for_p1 SMALLINT,
+        goals_for_p2 SMALLINT,
+        goals_for_p3 SMALLINT,
+        goals_for_ot SMALLINT,
+        goals_against_p1 SMALLINT,
+        goals_against_p2 SMALLINT,
+        goals_against_p3 SMALLINT,
+        goals_against_ot SMALLINT,
         PRIMARY KEY(team, game_date)
     );
 """
@@ -235,31 +235,31 @@ goals_by_period_table_insert = """
     INSERT INTO goals_by_period (
         team,
         game_date,
-        ev_goals_for,
-        pp_goals_for,
-        sh_goals_for,
-        gf_p1,
-        gf_p2,
-        gf_p3,
-        gf_ot,
-        ga_p1,
-        ga_p2,
-        ga_p3,
-        ga_ot
+        goals_for_ev,
+        goals_for_pp,
+        goals_for_sh,
+        goals_for_p1,
+        goals_for_p2,
+        goals_for_p3,
+        goals_for_ot,
+        goals_against_p1,
+        goals_against_p2,
+        goals_against_p3,
+        goals_against_ot
     ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     ON CONFLICT (team, game_date) DO UPDATE
     SET
-        ev_goals_for = EXCLUDED.ev_goals_for,
-        pp_goals_for = EXCLUDED.pp_goals_for,
-        sh_goals_for = EXCLUDED.sh_goals_for,
-        gf_p1 = EXCLUDED.gf_p1,
-        gf_p2 = EXCLUDED.gf_p2,
-        gf_p3 = EXCLUDED.gf_p3,
-        gf_ot = EXCLUDED.gf_ot,
-        ga_p1 = EXCLUDED.ga_p1,
-        ga_p2 = EXCLUDED.ga_p2,
-        ga_p3 = EXCLUDED.ga_p3,
-        ga_ot = EXCLUDED.ga_ot;
+        goals_for_ev = EXCLUDED.goals_for_ev,
+        goals_for_pp = EXCLUDED.goals_for_pp,
+        goals_for_sh = EXCLUDED.goals_for_sh,
+        goals_for_p1 = EXCLUDED.goals_for_p1,
+        goals_for_p2 = EXCLUDED.goals_for_p2,
+        goals_for_p3 = EXCLUDED.goals_for_p3,
+        goals_for_ot = EXCLUDED.goals_for_ot,
+        goals_against_p1 = EXCLUDED.goals_against_p1,
+        goals_against_p2 = EXCLUDED.goals_against_p2,
+        goals_against_p3 = EXCLUDED.goals_against_p3,
+        goals_against_ot = EXCLUDED.goals_against_ot;
 """
 
 # QUERY LISTS
@@ -273,5 +273,6 @@ create_table_queries = {
     "teams": teams_table_create,
     "summary": summary_table_create,
     "powerplay": powerplay_table_create,
-    "shot_attempts": shot_attempts_table_create
+    "shot_attempts": shot_attempts_table_create,
+    "goals_by_period": goals_by_period_table_create
 }
