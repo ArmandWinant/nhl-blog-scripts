@@ -2,7 +2,7 @@ from extract import open_driver, close_driver, wait_for_element
 from transforms import parse_record, parse_game_date, game_season
 from selenium.webdriver.common.by import By
 from scraper import Scraper, get_table_columns, get_table_rows
-from sql_queries import shot_attempts_table_insert
+from sql_queries import goals_by_period_table_insert
 import urllib.parse
 from datetime import datetime
 import time
@@ -11,7 +11,7 @@ import time
 class GoalsByPeriodScraper(Scraper):
     def __init__(self):
         super().__init__()
-        self.table_insert = shot_attempts_table_insert
+        self.table_insert = goals_by_period_table_insert
         self.url_dict["report"]= "goalsbyperiod"
     
     
