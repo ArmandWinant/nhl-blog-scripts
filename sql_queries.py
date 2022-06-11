@@ -246,7 +246,7 @@ goals_by_period_table_insert = """
         goals_against_p2,
         goals_against_p3,
         goals_against_ot
-    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     ON CONFLICT (team, game_date) DO UPDATE
     SET
         goals_for_ev = EXCLUDED.goals_for_ev,
