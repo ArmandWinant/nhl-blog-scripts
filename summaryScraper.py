@@ -27,32 +27,60 @@ class SummaryScraper(Scraper):
             self.cur.execute("SELECT abbreviation FROM teams WHERE team = %s;", (map_dict["Team"],))
             team_abbreviation = self.cur.fetchone()[0]
             
-            ordered_data_list = [
-                team_abbreviation,
-                map_dict["season"],
-                map_dict["game_date"],
-                map_dict["home_game"],
-                map_dict["opponent"],
-                map_dict["W"],
-                map_dict["L"],
-                map_dict["T"],
-                map_dict["OT"],
-                map_dict["P"],
-                map_dict["P%"],
-                map_dict["RW"],
-                map_dict["ROW"],
-                map_dict["S/O Win"],
-                map_dict["GF"],
-                map_dict["GA"],
-                map_dict["PP%"],
-                map_dict["PK%"],
-                map_dict["Net PP%"],
-                map_dict["Net PK%"],
-                map_dict["Shots/GP"],
-                map_dict["GA/GP"],
-                map_dict["FOW%"],
-                playoffs
-            ]
+            if playoffs:
+                ordered_data_list = [
+                    team_abbreviation,
+                    map_dict["season"],
+                    map_dict["game_date"],
+                    map_dict["home_game"],
+                    map_dict["opponent"],
+                    map_dict["W"],
+                    map_dict["L"],
+                    map_dict["T"],
+                    None,
+                    map_dict["P"],
+                    map_dict["P%"],
+                    map_dict["RW"],
+                    map_dict["ROW"],
+                    map_dict["S/O Win"],
+                    map_dict["GF"],
+                    map_dict["GA"],
+                    map_dict["PP%"],
+                    map_dict["PK%"],
+                    map_dict["Net PP%"],
+                    map_dict["Net PK%"],
+                    map_dict["Shots/GP"],
+                    map_dict["GA/GP"],
+                    map_dict["FOW%"],
+                    playoffs
+                ]
+            else:
+                ordered_data_list = [
+                    team_abbreviation,
+                    map_dict["season"],
+                    map_dict["game_date"],
+                    map_dict["home_game"],
+                    map_dict["opponent"],
+                    map_dict["W"],
+                    map_dict["L"],
+                    map_dict["T"],
+                    map_dict["OT"],
+                    map_dict["P"],
+                    map_dict["P%"],
+                    map_dict["RW"],
+                    map_dict["ROW"],
+                    map_dict["S/O Win"],
+                    map_dict["GF"],
+                    map_dict["GA"],
+                    map_dict["PP%"],
+                    map_dict["PK%"],
+                    map_dict["Net PP%"],
+                    map_dict["Net PK%"],
+                    map_dict["Shots/GP"],
+                    map_dict["GA/GP"],
+                    map_dict["FOW%"],
+                    playoffs
+                ]
                     
             self.staged_data.append(ordered_data_list)
             
