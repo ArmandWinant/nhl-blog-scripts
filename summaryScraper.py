@@ -22,7 +22,7 @@ class SummaryScraper(Scraper):
             row_values = [cell.text for cell in row_cells]
             
             values_map = list(zip(headers, row_values))
-            map_dict = parse_record(values_map)
+            map_dict = parse_record(values_map, playoffs=playoffs)
 
             self.cur.execute("SELECT abbreviation FROM teams WHERE team = %s;", (map_dict["Team"],))
             team_abbreviation = self.cur.fetchone()[0]

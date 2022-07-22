@@ -6,7 +6,7 @@ import glob
 import re
 from datetime import datetime
 
-def parse_record(row_tuples):
+def parse_record(row_tuples, playoffs=False):
     """
     inputs
         row_tuples (lst): list of string tuples, (header, value)
@@ -51,7 +51,7 @@ def parse_record(row_tuples):
         # parse game information string (date & opponent)
         m = re.search(r'^\d{4}/\d{2}/\d{2}(vs|@) ([A-Z]){3}$', value)
         if m:
-            game_info = parse_game_date(m.group(0))
+            game_info = parse_game_date(m.group(0), playoffs=playoffs)
             if game_info:
                 home_game = game_info[0]
                 opponent = game_info[1]
